@@ -1,0 +1,8 @@
+package com.example.bananesexport.domain.ports.outbound;
+
+import com.example.bananesexport.domain.model.Recipient;
+
+public interface CreateRecipientPort {
+
+    void createRecipient(Recipient recipient);
+}
