@@ -7,6 +7,6 @@ import static java.util.Objects.isNull;
 public record Price(BigDecimal value) {
 
     public Price {
-        if (isNull(value)) throw new IllegalArgumentException("Value is null");
+        if (isNull(value) || value.compareTo(BigDecimal.ZERO) < 0) throw new IllegalArgumentException("Value is not supported");
     }
 }
