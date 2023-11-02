@@ -30,7 +30,7 @@ public class Command {
         this.recipient = recipient;
     }
 
-    private void checkRules(LocalDate deliveryDate, int quantity, Price pricePerKilo, Recipient recipient) throws DeliveryDateException, QuantityException {
+    private void checkRules(LocalDate deliveryDate, int quantity, Price pricePerKilo, Recipient recipient){
         if (isNull(deliveryDate)) throw new IllegalArgumentException("Delivery date is null");
         if (isNull(pricePerKilo)) throw new IllegalArgumentException("Price per kilo is null");
         if (isNull(recipient)) throw new IllegalArgumentException("Recipient is null");

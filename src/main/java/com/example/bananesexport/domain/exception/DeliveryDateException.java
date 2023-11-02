@@ -1,7 +1,9 @@
 package com.example.bananesexport.domain.exception;
 
-public class DeliveryDateException extends Exception {
+import org.springframework.http.HttpStatus;
+
+public class DeliveryDateException extends BusinessException {
     public DeliveryDateException(String msg) {
-        super(msg);
+        super(HttpStatus.INTERNAL_SERVER_ERROR, msg);
     }
 }

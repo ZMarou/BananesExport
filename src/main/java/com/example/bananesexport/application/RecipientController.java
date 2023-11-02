@@ -1,6 +1,5 @@
 package com.example.bananesexport.application;
 
-import com.example.bananesexport.domain.exception.RecipientException;
 import com.example.bananesexport.domain.model.Recipient;
 import com.example.bananesexport.domain.ports.inbound.CreateRecipientUseCase;
 import com.example.bananesexport.domain.ports.inbound.DeleteRecipientUseCase;
@@ -23,21 +22,13 @@ public class RecipientController {
 
     @PostMapping
     public ResponseEntity<String> createRecipient(@Valid @RequestBody Recipient recipient) {
-        try {
-            createRecipientUseCase.createRecipient(recipient);
-        } catch (RecipientException e) {
-            return ResponseEntity.internalServerError().body(e.getMessage());
-        }
+        createRecipientUseCase.createRecipient(recipient);
         return ResponseEntity.ok().body("OK");
     }
 
     @DeleteMapping
     public ResponseEntity<String> deleteRecipient(@Valid @RequestBody Recipient recipient) {
-        try {
-            deleteRecipientUseCase.deleteRecipient(recipient);
-        } catch (RecipientException e) {
-            return ResponseEntity.internalServerError().body(e.getMessage());
-        }
+        deleteRecipientUseCase.deleteRecipient(recipient);
         return ResponseEntity.ok().body("OK");
     }
 

@@ -13,6 +13,7 @@ import java.util.List;
 public class GetAllRecipientService implements GetAllRecipientUseCase {
 
     private GetRecipientPort getRecipientPort;
+
     @Override
     public List<Recipient> getAllRecipient() {
         return getRecipientPort.getAllRecipient();

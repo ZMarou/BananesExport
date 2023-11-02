@@ -1,7 +1,9 @@
 package com.example.bananesexport.domain.exception;
 
-public class QuantityException extends Exception {
+import org.springframework.http.HttpStatus;
+
+public class QuantityException extends BusinessException {
     public QuantityException(String msg) {
-        super(msg);
+        super(HttpStatus.INTERNAL_SERVER_ERROR, msg);
     }
 }

@@ -1,7 +1,9 @@
 package com.example.bananesexport.domain.exception;
 
-public class RecipientException extends Exception {
+import org.springframework.http.HttpStatus;
+
+public class RecipientException extends BusinessException {
     public RecipientException(String msg) {
-        super(msg);
+        super(HttpStatus.INTERNAL_SERVER_ERROR, msg);
     }
 }

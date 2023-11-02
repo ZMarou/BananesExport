@@ -1,7 +1,5 @@
 package com.example.bananesexport.domain.services;
 
-import com.example.bananesexport.domain.exception.DeliveryDateException;
-import com.example.bananesexport.domain.exception.QuantityException;
 import com.example.bananesexport.domain.exception.RecipientException;
 import com.example.bananesexport.domain.model.Command;
 import com.example.bananesexport.domain.model.Price;
@@ -44,7 +42,7 @@ public class CreateCommandServiceTest {
     }
 
     @Test
-    public void should_create_command_when_recipient_exits() throws DeliveryDateException, QuantityException, RecipientException {
+    public void should_create_command_when_recipient_exits() {
         Command cmd = new Command(1L, DELIVERY_DATE, 25, PRICE_PER_KILO, RECIPIENT);
         when(getRecipientPort.getRecipient(cmd.getRecipient())).thenReturn(cmd.getRecipient());
         when(createCommandPort.createCommand(any())).thenReturn(cmd);
@@ -57,7 +55,7 @@ public class CreateCommandServiceTest {
     }
 
     @Test
-    public void should_return_recipient_exception_when_recipient_dont_exits() throws DeliveryDateException, QuantityException {
+    public void should_return_recipient_exception_when_recipient_dont_exits() {
         Command cmd = new Command(1L, DELIVERY_DATE, 25, PRICE_PER_KILO, RECIPIENT);
         when(getRecipientPort.getRecipient(cmd.getRecipient())).thenReturn(null);
         RecipientException exception = assertThrows(RecipientException.class, () -> createCommandService.createCommand(cmd));

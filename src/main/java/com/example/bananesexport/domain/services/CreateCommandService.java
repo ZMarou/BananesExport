@@ -1,7 +1,5 @@
 package com.example.bananesexport.domain.services;
 
-import com.example.bananesexport.domain.exception.DeliveryDateException;
-import com.example.bananesexport.domain.exception.QuantityException;
 import com.example.bananesexport.domain.exception.RecipientException;
 import com.example.bananesexport.domain.model.Command;
 import com.example.bananesexport.domain.model.Recipient;
@@ -22,7 +20,7 @@ public class CreateCommandService implements CreateCommandUseCase {
     private GetRecipientPort getRecipientPort;
 
     @Override
-    public Command createCommand(Command command) throws DeliveryDateException, QuantityException, RecipientException {
+    public Command createCommand(Command command) {
         Recipient recipientFounded = getRecipientPort.getRecipient(command.getRecipient());
         if (recipientFounded != null) {
             Command cmd = createCommandPort.createCommand(new Command(new Random().nextLong(), command.getDeliveryDate(), command.getQuantity(), command.getPricePerKilo(), recipientFounded));

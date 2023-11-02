@@ -24,12 +24,12 @@ public class DeleteRecipientService implements DeleteRecipientUseCase {
     private GetCommandPort getCommandPort;
 
     @Override
-    public void deleteRecipient(Recipient recipient) throws RecipientException {
+    public void deleteRecipient(Recipient recipient) {
         Recipient recipientFounded = getRecipientPort.getRecipient(recipient);
         List<Command> commandList = getCommandPort.getCommandsByRecipient(recipient);
-        if (recipientFounded == null || CollectionUtils.isEmpty(commandList)){
+        if (recipientFounded == null || CollectionUtils.isEmpty(commandList)) {
             deleteRecipientPort.deleteRecipient(recipientFounded);
-        } else{
+        } else {
             throw new RecipientException("Recipient can't be deleted");
         }
     }

@@ -16,7 +16,7 @@ public class CommandTest {
     public static final LocalDate DELIVERY_DATE = LocalDate.now().plusDays(9);
 
     @Test
-    public void should_create_command_when_all_field_filled() throws DeliveryDateException, QuantityException {
+    public void should_create_command_when_all_field_filled() {
         Command cmd = new Command(1L, DELIVERY_DATE, 25, PRICE_PER_KILO, RECIPIENT);
         assertNotNull(cmd);
     }

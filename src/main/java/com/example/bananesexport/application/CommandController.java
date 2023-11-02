@@ -1,8 +1,5 @@
 package com.example.bananesexport.application;
 
-import com.example.bananesexport.domain.exception.DeliveryDateException;
-import com.example.bananesexport.domain.exception.QuantityException;
-import com.example.bananesexport.domain.exception.RecipientException;
 import com.example.bananesexport.domain.model.Command;
 import com.example.bananesexport.domain.model.Recipient;
 import com.example.bananesexport.domain.ports.inbound.CreateCommandUseCase;
@@ -23,13 +20,9 @@ public class CommandController {
     private final GetCommandsByRecipientUseCase getCommandsByRecipientUseCase;
 
     @PostMapping
-    public ResponseEntity<String> createCommand(@Valid @RequestBody Command command) {
-        try {
-            Command cmd = createCommandUseCase.createCommand(command);
-            return ResponseEntity.ok().body(cmd.toString());
-        } catch (DeliveryDateException | QuantityException | RecipientException e) {
-            return ResponseEntity.internalServerError().body(e.getMessage());
-        }
+    public ResponseEntity<Command> createCommand(@Valid @RequestBody Command command) {
+        return ResponseEntity.ok().body(createCommandUseCase.createCommand(command));
+
     }
 
     @GetMapping
