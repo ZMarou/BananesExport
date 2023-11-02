@@ -4,7 +4,7 @@ import com.example.bananesexport.domain.exception.BusinessException;
 import com.example.bananesexport.domain.exception.DeliveryDateException;
 import com.example.bananesexport.domain.exception.QuantityException;
 import com.example.bananesexport.domain.exception.RecipientException;
-import com.example.bananesexport.domain.model.BusinessExceptionResponse;
+import com.example.bananesexport.domain.exception.BusinessExceptionResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpHeaders;

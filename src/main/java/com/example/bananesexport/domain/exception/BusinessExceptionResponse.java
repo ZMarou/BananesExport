@@ -1,4 +1,4 @@
-package com.example.bananesexport.domain.model;
+package com.example.bananesexport.domain.exception;
 
 import org.springframework.http.HttpStatus;
 
