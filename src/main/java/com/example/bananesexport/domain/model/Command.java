@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.UUID;
 
 import static com.example.bananesexport.domain.model.Constants.*;
 import static java.util.Objects.isNull;
@@ -13,14 +14,14 @@ import static java.util.Objects.isNull;
 @Data
 public class Command {
 
-    private long id;
+    private UUID id;
     private LocalDate deliveryDate;
     private int quantity;
     private Price pricePerKilo;
     private Recipient recipient;
     private Price price;
 
-    public Command(long id, LocalDate deliveryDate, int quantity, Price pricePerKilo, Recipient recipient)
+    public Command(UUID id, LocalDate deliveryDate, int quantity, Price pricePerKilo, Recipient recipient)
             throws DeliveryDateException, QuantityException {
         checkRules(deliveryDate, quantity, pricePerKilo, recipient);
         this.id = id;

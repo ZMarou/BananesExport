@@ -8,6 +8,8 @@ import com.example.bananesexport.domain.ports.outbound.GetRecipientPort;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @AllArgsConstructor
 @Service
 public class CreateRecipientService implements CreateRecipientUseCase {
@@ -18,8 +20,8 @@ public class CreateRecipientService implements CreateRecipientUseCase {
 
     @Override
     public void createRecipient(Recipient recipient) {
-        Recipient recipientFounded = getRecipientPort.getRecipient(recipient);
-        if (recipientFounded == null) {
+        Optional<Recipient> recipientFounded = getRecipientPort.getRecipient(recipient);
+        if (recipientFounded.isEmpty()) {
             createRecipientPort.createRecipient(recipient);
         } else {
             throw new RecipientException("Recipient is already exists");

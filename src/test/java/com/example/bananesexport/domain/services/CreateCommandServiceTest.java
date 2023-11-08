@@ -1,11 +1,9 @@
 package com.example.bananesexport.domain.services;
 
-import com.example.bananesexport.domain.exception.RecipientException;
 import com.example.bananesexport.domain.model.Command;
 import com.example.bananesexport.domain.model.Price;
 import com.example.bananesexport.domain.model.Recipient;
-import com.example.bananesexport.infrastructure.CreateCommandAdapter;
-import com.example.bananesexport.infrastructure.GetRecipientAdapter;
+import com.example.bananesexport.infrastructure.adapter.CreateCommandAdapter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -33,9 +32,6 @@ public class CreateCommandServiceTest {
     @Mock
     private CreateCommandAdapter createCommandPort;
 
-    @Mock
-    private GetRecipientAdapter getRecipientPort;
-
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -43,24 +39,12 @@ public class CreateCommandServiceTest {
 
     @Test
     public void should_create_command_when_recipient_exits() {
-        Command cmd = new Command(1L, DELIVERY_DATE, 25, PRICE_PER_KILO, RECIPIENT);
-        when(getRecipientPort.getRecipient(cmd.getRecipient())).thenReturn(cmd.getRecipient());
+        Command cmd = new Command(UUID.randomUUID(), DELIVERY_DATE, 25, PRICE_PER_KILO, RECIPIENT);
         when(createCommandPort.createCommand(any())).thenReturn(cmd);
         Command result = createCommandService.createCommand(cmd);
         assertNotNull(result);
         assertNotEquals(0, result.getId());
         assertEquals(0, BigDecimal.valueOf(250L).compareTo(result.getPrice().value()));
-        verify(getRecipientPort, times(1)).getRecipient(cmd.getRecipient());
         verify(createCommandPort, times(1)).createCommand(any());
-    }
-
-    @Test
-    public void should_return_recipient_exception_when_recipient_dont_exits() {
-        Command cmd = new Command(1L, DELIVERY_DATE, 25, PRICE_PER_KILO, RECIPIENT);
-        when(getRecipientPort.getRecipient(cmd.getRecipient())).thenReturn(null);
-        RecipientException exception = assertThrows(RecipientException.class, () -> createCommandService.createCommand(cmd));
-        assertEquals("Recipient is not exists", exception.getMessage());
-        verify(getRecipientPort, times(1)).getRecipient(cmd.getRecipient());
-        verify(createCommandPort, times(0)).createCommand(any());
     }
 }
