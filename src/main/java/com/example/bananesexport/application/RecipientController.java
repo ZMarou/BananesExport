@@ -4,7 +4,7 @@ import com.example.bananesexport.domain.model.Recipient;
 import com.example.bananesexport.domain.ports.inbound.CreateRecipientUseCase;
 import com.example.bananesexport.domain.ports.inbound.DeleteRecipientUseCase;
 import com.example.bananesexport.domain.ports.inbound.GetAllRecipientUseCase;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/v1/recipients")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class RecipientController {
 
     private final CreateRecipientUseCase createRecipientUseCase;
