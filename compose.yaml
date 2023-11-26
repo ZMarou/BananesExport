@@ -1,10 +1,9 @@
 version: '2'
 services:
   app:
-    image: 'docker-spring-boot-postgres:latest'
     container_name: app
     build:
-      dockerfile: ./Dockerfile
+      dockerfile: deploy/app/Dockerfile
     ports:
       - "8080:8080"
     environment:
@@ -15,13 +14,12 @@ services:
     depends_on:
       - db
   db:
-    image: 'postgres:13.1-alpine'
     container_name: db
+    build:
+      dockerfile: deploy/db/Dockerfile
     restart: always
     environment:
       - POSTGRES_USER=sa
       - POSTGRES_PASSWORD=password
     ports:
       - "5432:5432"
-    volumes:
-      - ./script/entrypoint.sql:/docker-entrypoint-initdb.d/entrypoint.sql
