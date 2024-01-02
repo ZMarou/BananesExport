@@ -1,4 +1,4 @@
-# BananesExport (Java, Spring boot, Postgres, H2, Docker, Kubernetes)
+# BananesExport (Java, Spring boot, Postgres, H2, Docker, Kubernetes, OpenAPI)
 BananesExport est une entreprise d'exportation de bananes qui aimerait avoir une solution pour gérer son catalogue de commandes.
 Une commande de bananes comprend les éléments suivants :
 
